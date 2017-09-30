@@ -1,0 +1,12 @@
+{
+  "": {
+    "dependencies": {
+      "string_view": "_deps/string_view"
+    }
+  }, 
+  "_deps/string_view": {
+    "commit": "eeb80ca27ad32a89a980bcd116b032d727bbbf2e", 
+    "type": "git", 
+    "url": "https://github.com/avakar/string_view.git"
+  }
+}

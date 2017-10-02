@@ -1,4 +1,6 @@
 #include <avakar/blob.h>
+#include <avakar/rope.h>
+using namespace avakar;
 
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -18,7 +20,7 @@ TEST_CASE("from string literal", "")
 
 TEST_CASE("rope", "")
 {
-	avakar::rope r = "test";
+	rope r = "test";
 
 	r = r | "ahoj" | "cau";
 	REQUIRE(r.str() == "testahojcau");

@@ -1,31 +1,13 @@
 #ifndef AVAKAR_BLOB_H
 #define AVAKAR_BLOB_H
 
+#include "../../src/node.h"
+
 #include <string_view>
 #include <vector>
 #include <stdint.h>
 
-// _ref_counter
-#include <atomic>
-
 namespace avakar {
-
-struct _ref_counter
-{
-	virtual void destroy() = 0;
-	virtual void read(char * buf, uint64_t offs, size_t len) = 0;
-	virtual uint64_t length() const = 0;
-
-	std::atomic<size_t> count_;
-};
-
-struct _in_memory
-	: _ref_counter
-{
-	virtual std::string_view get() const = 0;
-	void read(char * buf, uint64_t offs, size_t len) override;
-	uint64_t length() const override;
-};
 
 struct blob
 {
@@ -48,6 +30,7 @@ struct blob
 	blob & operator=(blob o);
 
 	bool empty() const;
+	size_t size() const;
 
 	blob operator()(size_t offs) const;
 	blob operator()(size_t offs, size_t len) const;
@@ -64,59 +47,14 @@ struct blob
 
 	friend blob operator+(blob const & lhs, blob const & rhs);
 
+	blob & operator+=(blob const & rhs);
+
+private:
+	_rope_memory_node * _root;
+	std::string_view _sv;
+
 	friend struct rope;
-	friend rope operator|(blob const & lhs, blob const & rhs);
-
-private:
-	_in_memory * rc_;
-	std::string_view sv_;
 };
-
-struct rope
-{
-	rope();
-	rope(rope const & o);
-	rope(rope && o);
-	rope(blob b);
-	~rope();
-
-	rope & operator=(rope o);
-
-	bool empty() const;
-
-	rope operator()(size_t offs) const;
-	rope operator()(size_t offs, size_t len) const;
-
-	std::string str() const;
-
-	uint64_t length() const;
-	void read(char * buf, uint64_t offs, size_t len) const;
-	std::string read(uint64_t offs, size_t len) const;
-
-	friend rope operator|(rope lhs, rope rhs);
-
-private:
-	_ref_counter * rc_;
-
-	struct sv
-	{
-		char const * first;
-		char const * last;
-	};
-
-	struct slice
-	{
-		uint64_t first;
-		uint64_t last;
-	};
-
-	union
-	{
-		sv sv_;
-		slice slice_;
-	};
-};
-
 
 }
 

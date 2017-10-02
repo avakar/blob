@@ -5,7 +5,12 @@ include(deps.cmake)
 
 add_library(avakar.blob STATIC
 	include/avakar/blob.h
+	include/avakar/rope.h
 	src/blob.cpp
+	src/node.cpp
+	src/node.h
+	src/rope.cpp
+	src/storage.h
 	)
 
 target_include_directories(avakar.blob PUBLIC include)

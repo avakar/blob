@@ -50,14 +50,14 @@ rope::rope(rope && o)
 	o._root = nullptr;
 }
 
-rope::rope(blob && b)
+/*rope::rope(blob && b)
 	: _root(b._root), _length(b.size())
 {
 	if (_root)
 		_offset = b._sv.data() - b._root->view().data();
 	else
 		_offset = reinterpret_cast<uint64_t>(b._sv.data());
-}
+}*/
 
 rope::~rope()
 {

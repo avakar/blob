@@ -5,7 +5,7 @@
     }
   }, 
   "_deps/string_view": {
-    "commit": "eeb80ca27ad32a89a980bcd116b032d727bbbf2e", 
+    "commit": "9f1a249f815c2297ef5cac72f34f640e3a345c5c", 
     "type": "git", 
     "url": "https://github.com/avakar/string_view.git"
   }

@@ -1,7 +1,7 @@
 #ifndef AVAKAR_BLOB_H
 #define AVAKAR_BLOB_H
 
-#include "../../src/node.h"
+#include <avakar/token.h>
 
 #include <string_view>
 #include <vector>
@@ -12,8 +12,6 @@ namespace avakar {
 struct blob
 {
 	blob();
-	blob(blob const & o);
-	blob(blob && o);
 
 	blob(char const * str);
 	blob(char const * str, size_t len);
@@ -24,10 +22,6 @@ struct blob
 	blob(std::string && str);
 	blob(std::vector<char> const & v);
 	blob(std::vector<char> && v);
-
-	~blob();
-
-	blob & operator=(blob o);
 
 	bool empty() const;
 	size_t size() const;
@@ -50,7 +44,7 @@ struct blob
 	blob & operator+=(blob const & rhs);
 
 private:
-	_rope_memory_node * _root;
+	token _storage;
 	std::string_view _sv;
 
 	friend struct rope;

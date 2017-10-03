@@ -2,6 +2,7 @@
 #define AVAKAR_ROPE_H
 
 #include "blob.h"
+#include "../../src/node.h"
 
 namespace avakar {
 

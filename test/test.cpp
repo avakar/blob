@@ -18,10 +18,10 @@ TEST_CASE("from string literal", "")
 	REQUIRE(b == "test");
 }
 
-TEST_CASE("rope", "")
+/*TEST_CASE("rope", "")
 {
 	rope r = "test";
 
 	r = r | "ahoj" | "cau";
 	REQUIRE(r.str() == "testahojcau");
-}
+}*/
